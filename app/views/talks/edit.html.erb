@@ -1,0 +1,7 @@
+
+<h1>Editing talk</h1>
+
+<%= render 'form' %>
+
+<%= link_to t( "menu.show", default: "Show" ), action: "show", id: @talk.id %>
+ | <%= link_to t( "menu.list", default: "List" ), action: "index" %>

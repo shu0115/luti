@@ -1,0 +1,32 @@
+<h1>Listing talks</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @talks.each{ |talk| %>
+  <tr>
+    <td><%= talk.user_id %></td>
+    <td><%= talk.name %></td>
+    <td><%= link_to "Pages", controller: "pages", talk_id: talk.id %></td>
+    <td><%= link_to t( "menu.show", default: "Show" ), action: "show", id: talk.id %></td>
+    <td><%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: talk.id %></td>
+    <td><%= link_to t( "menu.destroy", default: "Delete" ), { action: "destroy", id: talk.id }, onclick: "return confirm('本当に削除してよろしいですか？');" %></td>
+  </tr>
+<% } %>
+</table>
+
+<br />
+
+<%= link_to t( "menu.new", default: "New" ), action: "new" %>
+
+<br />
+<br />
+
+<%= link_to t( "menu.top", default: "Top" ), :root %>

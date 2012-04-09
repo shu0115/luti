@@ -1,0 +1,14 @@
+
+<p>
+  <b>User:</b>
+  <%= @talk.user_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @talk.name %>
+</p>
+
+
+<%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: @talk.id %>
+ | <%= link_to t( "menu.list", default: "List" ), action: "index" %>

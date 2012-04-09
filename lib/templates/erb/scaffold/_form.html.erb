@@ -1,3 +1,4 @@
+
 <%%= form_for :<%= singular_table_name %>, url: { action: @submit, id: @<%= singular_table_name %>.try(:id) } do |f| %>
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">
@@ -19,6 +20,6 @@
 
 <% end -%>
   <div class="actions">
-    <%%= f.submit t("menu.#{@submit}", default: @submit ), disable_with: t("menu.#{@submit}") %>
+    <%%= f.submit t( "menu.#{@submit}", default: @submit ), disable_with: t( "menu.#{@submit}", default: @submit ) %>
   </div>
 <%% end %>

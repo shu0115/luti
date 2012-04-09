@@ -11,7 +11,9 @@
 <%# ----- 追加 ----- %>
 <% if current_user %>
   <%# ログイン済み %>
-  <%= current_user.name %> : <%= link_to "Logout" , logout_path %>
+  <%= current_user.name %> : 
+  <%= link_to "Talk" , controller: "talks" %>
+   || <%= link_to "Logout" , logout_path %>
 <% else %>
   <%# 未ログイン %>
   <%= link_to "Login", "/auth/#{DEFAULT_PROVIDER}" %>

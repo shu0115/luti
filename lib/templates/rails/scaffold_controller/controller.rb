@@ -5,14 +5,14 @@ class <%= controller_class_name %>Controller < ApplicationController
   # index #
   #-------#
   def index
-    @<%= plural_table_name %> = <%= orm_class.all( class_name ) %>
+    @<%= plural_table_name %> = <%= "#{class_name}.where( user_id: session[:user_id] ).all" %>
   end
 
   #------#
   # show #
   #------#
   def show
-    @<%= singular_table_name %> = <%= orm_class.find( class_name, " params[:id] " ) %>
+    @<%= singular_table_name %> = <%= "#{class_name}.where( id: params[:id], user_id: session[:user_id] ).first" %>
   end
 
   #-----#
@@ -28,7 +28,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # edit #
   #------#
   def edit
-    @<%= singular_table_name %> = <%= orm_class.find( class_name, " params[:id] " ) %>
+    @<%= singular_table_name %> = <%= "#{class_name}.where( id: params[:id], user_id: session[:user_id] ).first" %>
     
     @submit = "update"
   end
@@ -38,10 +38,10 @@ class <%= controller_class_name %>Controller < ApplicationController
   #--------#
   def create
     @<%= singular_table_name %> = <%= orm_class.build( class_name, " params[:#{singular_table_name}] " ) %>
+    @<%= "#{singular_table_name}.user_id" %> = <%= "session[:user_id]" %>
 
     if @<%= orm_instance.save %>
-      flash[:notice] = <%= "\"#{human_name} was successfully created.\"" %>
-      redirect_to action: "index"
+      redirect_to( { action: "index" }, notice: <%= "\"#{human_name} was successfully created.\"" %> )
     else
       render action: "new"
     end
@@ -51,13 +51,12 @@ class <%= controller_class_name %>Controller < ApplicationController
   # update #
   #--------#
   def update
-    @<%= singular_table_name %> = <%= orm_class.find( class_name, " params[:id] " ) %>
+    @<%= singular_table_name %> = <%= "#{class_name}.where( id: params[:id], user_id: session[:user_id] ).first" %>
 
     if @<%= orm_instance.update_attributes(" params[:#{singular_table_name}] ") %>
-      flash[:notice] = <%= "\"#{human_name} was successfully updated.\"" %>
-      redirect_to action: "show", id: params[:id]
+      redirect_to( { action: "show", id: <%= "params[:id]" %> }, notice: <%= "\"#{human_name} was successfully updated.\"" %> )
     else
-      render action: "edit", id: params[:id]
+      render action: "edit", id: <%= "params[:id]" %>
     end
   end
 
@@ -65,7 +64,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # destroy #
   #---------#
   def destroy
-    @<%= singular_table_name %> = <%= orm_class.find( class_name, " params[:id] " ) %>
+    @<%= singular_table_name %> = <%= "#{class_name}.where( id: params[:id], user_id: session[:user_id] ).first" %>
     @<%= orm_instance.destroy %>
 
     redirect_to action: "index"

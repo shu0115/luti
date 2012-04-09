@@ -1,0 +1,39 @@
+
+<h1>Listing pages</h1>
+
+<%= form_for :page, url: { action: "create", talk_id: @talk_id } do |f| %>
+  <div class="actions"><%= f.submit "New Page", disable_with: "New Page" %></div>
+<% end %>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Talk</th>
+    <th>Number</th>
+    <th>Contents</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pages.each{ |page| %>
+  <tr>
+    <td><%= page.user_id %></td>
+    <td><%= page.talk_id %></td>
+    <td><%= page.number %></td>
+    <td><%= page.contents %></td>
+    <td><%= link_to t( "menu.show", default: "Show" ), action: "show", id: page.id %></td>
+    <td><%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: page.id %></td>
+    <td><%= link_to t( "menu.destroy", default: "Delete" ), { action: "destroy", id: page.id }, onclick: "return confirm('本当に削除してよろしいですか？');" %></td>
+  </tr>
+<% } %>
+</table>
+
+<br />
+
+<%#= link_to t( "menu.new", default: "New" ), action: "new" %>
+
+<br />
+<br />
+
+<%= link_to t( "menu.top", default: "Top" ), :root %>

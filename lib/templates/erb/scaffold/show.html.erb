@@ -1,12 +1,11 @@
-<p id="notice"><%%= notice %></p>
 
-<% attributes.each do |attribute| -%>
+<% attributes.each{ |attribute| -%>
 <p>
   <b><%= attribute.human_name %>:</b>
   <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
 </p>
 
-<% end -%>
+<% } %>
 
-<%%= link_to t("menu.edit"), action: "edit", id: @<%= singular_table_name %>.id %> |
-<%%= link_to t("menu.list"), action: "index" %>
+<%%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: @<%= singular_table_name %>.id %>
+ | <%%= link_to t( "menu.list", default: "List" ), action: "index" %>
