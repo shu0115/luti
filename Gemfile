@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
+source 'http://production.cf.rubygems.org/'
 
 gem 'rails', '3.2.3'
 
