@@ -6,8 +6,17 @@ class PagesController < ApplicationController
   #-------#
   def index
     @talk_id = params[:talk_id]
-    @pages = Page.where( user_id: session[:user_id], talk_id: @talk_id ).all
+    @pages = Page.where( user_id: session[:user_id], talk_id: @talk_id ).order( "number ASC" ).all
     @page = Page.new
+  end
+
+  #---------#
+  # display #
+  #---------#
+  def display
+    @page = Page.where( id: params[:id], user_id: session[:user_id] ).first
+    
+    render layout: false
   end
 
   #------#
@@ -16,7 +25,7 @@ class PagesController < ApplicationController
   def show
     @page = Page.where( id: params[:id], user_id: session[:user_id] ).first
   end
-
+  
   #-----#
   # new #
   #-----#
@@ -43,7 +52,8 @@ class PagesController < ApplicationController
     @page = Page.new( params[:page] )
     @page.user_id = session[:user_id]
     @page.talk_id = @talk_id
-
+    @page.number = (Page.where( talk_id: @talk_id ).maximum( :number ).to_i + 1)
+    
     if @page.save
       redirect_to( { action: "index", talk_id: @talk_id } )
     else
@@ -58,9 +68,10 @@ class PagesController < ApplicationController
     @page = Page.where( id: params[:id], user_id: session[:user_id] ).first
 
     if @page.update_attributes( params[:page] )
-      redirect_to( { action: "show", id: params[:id] }, notice: "Page was successfully updated." )
+#      redirect_to( { action: "show", id: params[:id] }, notice: "Page was successfully updated." )
+      redirect_to( action: "index", talk_id: @page.talk_id )
     else
-      render action: "edit", id: params[:id]
+      render( action: "edit", id: params[:id] )
     end
   end
 
@@ -71,7 +82,7 @@ class PagesController < ApplicationController
     @page = Page.where( id: params[:id], user_id: session[:user_id] ).first
     @page.destroy
 
-    redirect_to action: "index"
+    redirect_to( action: "index", talk_id: @page.talk_id )
   end
 
 end

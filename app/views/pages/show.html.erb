@@ -16,10 +16,10 @@
 
 <p>
   <b>Contents:</b>
-  <%= @page.contents %>
+  <%= simple_format( @page.contents ) %>
 </p>
 
 
 
 <%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: @page.id %>
- | <%= link_to t( "menu.list", default: "List" ), action: "index" %>
+ | <%= link_to t( "menu.list", default: "List" ), action: "index", talk_id: @page.talk_id %>

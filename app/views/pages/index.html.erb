@@ -10,7 +10,8 @@
     <th>User</th>
     <th>Talk</th>
     <th>Number</th>
-    <th>Contents</th>
+    <!--<th>Contents</th>-->
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,7 +22,8 @@
     <td><%= page.user_id %></td>
     <td><%= page.talk_id %></td>
     <td><%= page.number %></td>
-    <td><%= page.contents %></td>
+    <% if false %><td><%= page.contents %></td><% end %>
+    <td><%= link_to t( "menu.display", default: "Display" ), { action: "display", id: page.id }, target: "_blank" %></td>
     <td><%= link_to t( "menu.show", default: "Show" ), action: "show", id: page.id %></td>
     <td><%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: page.id %></td>
     <td><%= link_to t( "menu.destroy", default: "Delete" ), { action: "destroy", id: page.id }, onclick: "return confirm('本当に削除してよろしいですか？');" %></td>
@@ -36,4 +38,4 @@
 <br />
 <br />
 
-<%= link_to t( "menu.top", default: "Top" ), :root %>
+<%= link_to "Talks", controller: "talks" %>

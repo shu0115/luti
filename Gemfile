@@ -42,8 +42,9 @@ gem 'jquery-rails'
 # For Heroku
 group :production do
   gem 'pg'
-  gem 'thin'
 end
+
+gem 'thin'
 
 # Utility
 gem 'kaminari'
