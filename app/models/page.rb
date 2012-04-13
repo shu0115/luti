@@ -1,3 +1,5 @@
 class Page < ActiveRecord::Base
-  attr_accessible :contents, :number, :talk_id, :user_id
+  attr_accessible :contents, :number, :talk_id, :user_id, :note
+  
+  belongs_to :talk
 end

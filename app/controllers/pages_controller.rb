@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   #-------#
   def index
     @talk_id = params[:talk_id]
+    @talk = Talk.where( user_id: session[:user_id], id: @talk_id ).first
     @pages = Page.where( user_id: session[:user_id], talk_id: @talk_id ).order( "number ASC" ).all
     @page = Page.new
   end
@@ -29,11 +30,13 @@ class PagesController < ApplicationController
   #-----#
   # new #
   #-----#
+=begin
   def new
     @page = Page.new
     
     @submit = "create"
   end
+=end
 
   #------#
   # edit #

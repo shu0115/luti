@@ -19,6 +19,11 @@
   <%= simple_format( @page.contents ) %>
 </p>
 
+<p>
+  <b>Note:</b>
+  <%= simple_format( @page.note ) %>
+</p>
+
 
 
 <%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: @page.id %>

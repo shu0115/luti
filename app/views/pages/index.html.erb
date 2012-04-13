@@ -1,5 +1,5 @@
 
-<h1>Listing pages</h1>
+<h1><%= @talk.name %> Pages</h1>
 
 <%= form_for :page, url: { action: "create", talk_id: @talk_id } do |f| %>
   <div class="actions"><%= f.submit "New Page", disable_with: "New Page" %></div>

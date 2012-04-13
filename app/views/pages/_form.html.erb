@@ -32,6 +32,11 @@
     <%= f.text_area :contents %>
   </div>
 
+  <div class="field">
+    <%= f.label :note %><br />
+    <%= f.text_area :note %>
+  </div>
+
   <div class="actions">
     <%= f.submit t( "menu.#{@submit}", default: @submit ), disable_with: t( "menu.#{@submit}", default: @submit ) %>
   </div>
