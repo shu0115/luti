@@ -10,6 +10,7 @@
     <th>User</th>
     <th>Talk</th>
     <th>Number</th>
+    <th>Title</th>
     <!--<th>Contents</th>-->
     <th></th>
     <th></th>
@@ -22,6 +23,7 @@
     <td><%= page.user_id %></td>
     <td><%= page.talk_id %></td>
     <td><%= page.number %></td>
+    <td><%= page.title %></td>
     <% if false %><td><%= page.contents %></td><% end %>
     <td><%= link_to t( "menu.display", default: "Display" ), { action: "display", id: page.id }, target: "_blank" %></td>
     <td><%= link_to t( "menu.show", default: "Show" ), action: "show", id: page.id %></td>
