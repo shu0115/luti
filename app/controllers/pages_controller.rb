@@ -32,11 +32,14 @@ class PagesController < ApplicationController
   # slide #
   #-------#
   def slide
-    talk_id = params[:talk_id]
+#    talk_id = params[:talk_id]
+    @talk = Talk.where( id: params[:talk_id] ).first
+    
+    redirect_to( { controller: "talks" }, alert: "該当するデータがありません。" ) and return if @talk.blank?
     
     # 自ユーザ以外も閲覧可能
 #    pages = Page.where( user_id: session[:user_id], talk_id: talk_id ).order( "number ASC" ).page( params[:page] ).per( 1 )
-    pages = Page.where( talk_id: talk_id ).order( "number ASC" ).page( params[:page] ).per( 1 )
+    pages = Page.where( talk_id: @talk.id ).order( "number ASC" ).page( params[:page] ).per( 1 )
     
     @pages = pages
     @page = pages.first
