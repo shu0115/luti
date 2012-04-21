@@ -1,4 +1,5 @@
 
+<% unless @talk.blank? %>
 <p>
   <b>User:</b>
   <%= @talk.user_id %>
@@ -12,3 +13,9 @@
 
 <%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: @talk.id %>
  | <%= link_to t( "menu.list", default: "List" ), action: "index" %>
+<% else %>
+  <br />
+  <br />
+  <%= link_to t( "menu.list", default: "List" ), action: "index" %><br />
+  <br />
+<% end %>

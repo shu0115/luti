@@ -1,7 +1,15 @@
 
 <h1>Editing talk</h1>
 
+<% unless @talk.blank? %>
+
 <%= render 'form' %>
 
 <%= link_to t( "menu.show", default: "Show" ), action: "show", id: @talk.id %>
  | <%= link_to t( "menu.list", default: "List" ), action: "index" %>
+<% else %>
+  <br />
+  <br />
+  <%= link_to t( "menu.list", default: "List" ), action: "index" %><br />
+  <br />
+<% end %>

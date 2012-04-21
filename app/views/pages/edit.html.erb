@@ -4,4 +4,4 @@
 <%= render 'form' %>
 
 <%= link_to t( "menu.show", default: "Show" ), action: "show", id: @page.id %>
- | <%= link_to t( "menu.list", default: "List" ), action: "index" %>
+ | <%= link_to t( "menu.list", default: "List" ), action: "index", talk_id: @page.talk_id %>

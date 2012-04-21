@@ -1,11 +1,17 @@
 # coding: utf-8
 class TalksController < ApplicationController
+  
+  PER_PAGE = 500
 
   #-------#
   # index #
   #-------#
   def index
-    @talks = Talk.where( user_id: session[:user_id] ).all
+    if params[:flag] == "mytalk"
+      @talks = Talk.where( user_id: session[:user_id] ).page( params[:page] ).per( PER_PAGE ).all
+    else
+      @talks = Talk.page( params[:page] ).per( PER_PAGE ).all
+    end
   end
 
   #------#
@@ -65,6 +71,9 @@ class TalksController < ApplicationController
   #---------#
   def destroy
     @talk = Talk.where( id: params[:id], user_id: session[:user_id] ).first
+    
+    redirect_to( { action: "index" }, alert: "該当するデータがありません。" ) and return if @talk.blank?
+    
     @talk.destroy
 
     redirect_to action: "index"

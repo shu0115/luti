@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     if params[:controller] == "top"
       # ログイン済みであればtalkへリダイレクト
       unless session[:user_id].blank?
-        redirect_to controller: "talk" and return
+        redirect_to controller: "talks" and return
       end
     end
   end

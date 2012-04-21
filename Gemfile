@@ -49,8 +49,8 @@ gem 'thin'
 
 # Utility
 gem 'kaminari'
-gem 'active_decorator'
-gem 'html5_validators'
+# gem 'active_decorator'
+# gem 'html5_validators'
 
 # OmniAuth
 gem 'omniauth-twitter'

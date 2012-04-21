@@ -12,7 +12,8 @@
 <% if current_user %>
   <%# ログイン済み %>
   <%= current_user.name %> : 
-  <%= link_to "Talk" , controller: "talks" %>
+  <%= link_to "Talks" , controller: "talks" %>
+   | <%= link_to "MyTalks" , controller: "talks", flag: "mytalk" %>
    || <%= link_to "Logout" , logout_path %>
 <% else %>
   <%# 未ログイン %>

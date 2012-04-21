@@ -1,6 +1,10 @@
 
-<!--
-<%=raw @page.note %>
--->
-
-<%=raw @page.contents %>
+<% if @page.template == "central" %>
+  <%= render partial: 'central' %>
+<% else %>
+  <!--
+  <%=raw @page.note %>
+  -->
+  
+  <%=raw @page.contents %>
+<% end %>

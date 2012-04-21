@@ -1,14 +1,22 @@
 
 <h1><%= @talk.name %> Pages</h1>
 
-<%= form_for :page, url: { action: "create", talk_id: @talk_id } do |f| %>
-  <div class="actions"><%= f.submit "New Page", disable_with: "New Page" %></div>
+<%# New Pageフォーム %>
+<% if @talk.own_user?( session[:user_id] ) %>
+  <%= form_for :page, url: { action: "create", talk_id: @talk_id } do |f| %>
+    <div class="actions"><%= f.submit "New Page", disable_with: "New Page" %></div>
+  <% end %>
 <% end %>
+
+<%# スライド表示 %>
+<%= link_to( "Slide", { controller: "pages", action: "slide", talk_id: @talk_id }, target: "_blank" ) %><br />
+
+<br />
 
 <table>
   <tr>
-    <th>User</th>
-    <th>Talk</th>
+    <% if false %><th>User</th><% end %>
+    <% if false %><th>Talk</th><% end %>
     <th>Number</th>
     <th>Title</th>
     <!--<th>Contents</th>-->
@@ -20,24 +28,25 @@
 
 <% @pages.each{ |page| %>
   <tr>
-    <td><%= page.user_id %></td>
-    <td><%= page.talk_id %></td>
+    <% if false %><td><%= page.user_id %></td><% end %>
+    <% if false %><td><%= page.talk_id %></td><% end %>
     <td><%= page.number %></td>
     <td><%= page.title %></td>
     <% if false %><td><%= page.contents %></td><% end %>
     <td><%= link_to t( "menu.display", default: "Display" ), { action: "display", id: page.id }, target: "_blank" %></td>
-    <td><%= link_to t( "menu.show", default: "Show" ), action: "show", id: page.id %></td>
-    <td><%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: page.id %></td>
-    <td><%= link_to t( "menu.destroy", default: "Delete" ), { action: "destroy", id: page.id }, onclick: "return confirm('本当に削除してよろしいですか？');" %></td>
+    <% if page.own_user?( session[:user_id] ) %>
+      <td><%= link_to t( "menu.show", default: "Show" ), action: "show", id: page.id %></td>
+      <td><%= link_to t( "menu.edit", default: "Edit" ), action: "edit", id: page.id %></td>
+      <td><%= link_to t( "menu.destroy", default: "Delete" ), { action: "destroy", id: page.id }, onclick: "return confirm('本当に削除してよろしいですか？');" %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+      <td></td>
+    <% end %>
   </tr>
 <% } %>
 </table>
 
-<br />
-
-<%#= link_to t( "menu.new", default: "New" ), action: "new" %>
-
-<br />
 <br />
 
 <%= link_to "Talks", controller: "talks" %>
