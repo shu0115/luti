@@ -19,6 +19,9 @@
     <% if false %><th>Talk</th><% end %>
     <th>Number</th>
     <th>Title</th>
+    <% if @talk.own_user?( session[:user_id] ) %>
+    <th>Template</th>
+    <% end %>
     <!--<th>Contents</th>-->
     <th></th>
     <th></th>
@@ -32,6 +35,9 @@
     <% if false %><td><%= page.talk_id %></td><% end %>
     <td><%= page.number %></td>
     <td><%= page.title %></td>
+    <% if page.own_user?( session[:user_id] ) %>
+    <td><%= page.template %></td>
+    <% end %>
     <% if false %><td><%= page.contents %></td><% end %>
     <td><%= link_to t( "menu.display", default: "Display" ), { action: "display", id: page.id }, target: "_blank" %></td>
     <% if page.own_user?( session[:user_id] ) %>

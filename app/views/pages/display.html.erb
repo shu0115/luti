@@ -1,6 +1,8 @@
 
-<% if @page.template == "central" %>
-  <%= render partial: 'central' %>
+<% if @page.template == "Central" %>
+  <%= render partial: "/pages/template/central" %>
+<% elsif @page.template == "InlineFrame" %>
+  <%= render partial: "/pages/template/iframe" %>
 <% else %>
   <!--
   <%=raw @page.note %>
